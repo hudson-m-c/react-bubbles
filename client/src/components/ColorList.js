@@ -24,6 +24,16 @@ const ColorList = (props) => {
     // think about where will you get the id from...
     // where is is saved right now?
     console.log(colorToEdit);
+    axiosWithAuth().put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
+    .then( resp => {
+      alert("Color updated");
+      props.updateColors( props.colors.map( curr => {
+        return (curr.id === colorToEdit.id) ? colorToEdit : curr;
+      }))
+    })
+    .catch( err => {
+      console.log(err);
+    })
     
   };
 
